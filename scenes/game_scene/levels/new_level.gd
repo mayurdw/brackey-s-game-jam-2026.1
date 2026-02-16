@@ -2,10 +2,16 @@ extends Node2D
 
 @export var min_distance_for_player := 128
 @export var starting_position := Vector2(256, 256)
-@onready var tile_manager: Node2D = $"Tile Manager"
-@onready var player: Area2D = $Player
+@export var manager : PackedScene = load("res://scenes/game_scene/tile_manager/Tile_manager.tscn")
 
+@export var levels : Dictionary[int, LevelDetails] = {
+	1 : LevelDetails.new(Vector2(4, 4), 64, 16)
+	}
 
 func _ready() -> void:
-	player.position = starting_position
+	var tile_manager = manager.instantiate()
+
+	tile_manager.level = levels[1]
 	tile_manager.position = starting_position
+	add_child(tile_manager)
+	tile_manager.populate()
