@@ -6,6 +6,7 @@
 size = Vector2(64, 64)
 
 [node name="Tile" type="Area2D" unique_id=1193322314]
+modulate = Color(1, 1, 1, 0.78431374)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1820774872]
 shape = SubResource("RectangleShape2D_sx8vd")
