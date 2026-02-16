@@ -5,7 +5,7 @@ extends Node2D
 @export var manager : PackedScene = load("res://scenes/game_scene/tile_manager/Tile_manager.tscn")
 
 @export var levels : Dictionary[int, LevelDetails] = {
-	1 : LevelDetails.new(Vector2(4, 4), 64, 16)
+	1 : LevelDetails.new([[0, 0, 2, 0], [0, 1, 1, 0], [0, 0, 1, 1], [1, 1, 1, 0]], 64, 16)
 	}
 
 func _ready() -> void:
