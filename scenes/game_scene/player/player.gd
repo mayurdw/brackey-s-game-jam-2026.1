@@ -1,11 +1,15 @@
 extends Area2D
 
 # TODO: This needs to come from the level manager
-const MOVEMENT_DISTANCE : int = 128
+const MOVEMENT_DISTANCE : int = 80
 const INPUTS := { "move_up" : Vector2.UP, "move_right" : Vector2.RIGHT, "move_left" : Vector2.LEFT, "move_down" : Vector2.DOWN }
 
 var animation_speed : float = 0.25
 var is_moving : bool = false
+var centre : Vector2 = Vector2(MOVEMENT_DISTANCE, MOVEMENT_DISTANCE)
+
+func _ready() -> void:
+	position = centre + Vector2(MOVEMENT_DISTANCE, 0)
 
 func _input(event: InputEvent) -> void:
 	for key in INPUTS.keys():
@@ -16,6 +20,6 @@ func _move(key: String) -> void:
 	is_moving = true
 	var tween = create_tween()
 	tween.tween_property(self, "position", 
-		position + INPUTS[key] * MOVEMENT_DISTANCE, animation_speed).set_trans(Tween.TRANS_SINE)
+		centre + INPUTS[key] * MOVEMENT_DISTANCE, animation_speed).set_trans(Tween.TRANS_SINE)
 	await tween.finished
 	is_moving = false
