@@ -22,10 +22,10 @@ func set_starting_position(movement_distance: int, grid_size: Vector2, centre: V
 func is_movement_possible(key: Vector2) -> bool:
 	if has_moved:
 		match (key):
-			Vector2.UP: return current_position_in_grid.y > 0
-			Vector2.DOWN: return current_position_in_grid.y < bounds.y - 1
-			Vector2.RIGHT: return (centre_position_in_grid.x >= current_position_in_grid.x and current_position_in_grid.x < bounds.x - 1)
-			Vector2.LEFT: return current_position_in_grid.x > 0
+			Vector2.UP: return centre_position_in_grid.y > 0 and current_position_in_grid.y != 0
+			Vector2.DOWN: return centre_position_in_grid.y < bounds.y - 1 and current_position_in_grid.y < bounds.y - 1
+			Vector2.RIGHT: return centre_position_in_grid.x < bounds.x - 1 and current_position_in_grid.x < bounds.x - 1
+			Vector2.LEFT: return centre_position_in_grid.x > 0 and current_position_in_grid.x != 0
 			_: return false
 	else:
 		match (key):
@@ -34,11 +34,7 @@ func is_movement_possible(key: Vector2) -> bool:
 			_: return false
 
 func move_position(key: Vector2) -> void:
-	match (key):
-		Vector2.UP: current_position_in_grid.y -= 1
-		Vector2.DOWN: current_position_in_grid.y += 1
-		Vector2.RIGHT: current_position_in_grid.x += 1
-		Vector2.LEFT: current_position_in_grid.x -= 1
+	current_position_in_grid = centre_position_in_grid + key
 
 func handle_movement_key(event: InputEvent, keys: Dictionary[String, Vector2]) -> void:
 	for key in keys.keys():
@@ -70,4 +66,5 @@ func _move_centre() -> void:
 	has_moved = true
 	centre = position
 	centre_position_in_grid = current_position_in_grid
+	current_position_in_grid = centre_position_in_grid + Vector2.RIGHT
 	position = centre + movement_distance * Vector2.RIGHT
