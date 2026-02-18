@@ -6,6 +6,8 @@ class_name TileManager
 @export var tile_scale : Vector2 = Vector2.ONE
 var instances : Array[Array]
 
+signal unsafe_tile
+
 func populate() -> void:
 	for x in range(0, level.grid_size.size()):
 		var row : Array[Tile] = []
@@ -18,14 +20,22 @@ func populate() -> void:
 			add_child(instance)
 		instances.append(row)
 
+func _check_tile_status(centre: Vector2) -> bool:
+	if centre.x < level.grid_size.size() and centre.y < level.grid_size[0].size() and 0 == level.grid_size[centre.y][centre.x]:
+		unsafe_tile.emit()
+		return false
+	
+	return true
+
 func new_centre(centre: Vector2) -> void:
 	print("Centre at new coordinates = %s" % centre)
-	var borders := [centre + Vector2.UP, centre + Vector2.DOWN, centre + Vector2.RIGHT, centre + Vector2.LEFT]
-	
-	for p in borders:
-		if is_valid(p):
-			print("Positions = %s" % p)
-			instances[p.x][p.y].flash_status()
+	if _check_tile_status(centre):
+		var borders := [centre + Vector2.UP, centre + Vector2.DOWN, centre + Vector2.RIGHT, centre + Vector2.LEFT]
+		
+		for p in borders:
+			if is_valid(p):
+				print("Positions = %s" % p)
+				instances[p.x][p.y].flash_status()
 
 func is_valid(border: Vector2) -> bool:
 	return border.y >= 0 and border.y <= instances.size() - 1 and border.x >= 0 and border.x <= instances[0].size() - 1

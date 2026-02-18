@@ -1,4 +1,5 @@
 extends Area2D
+class_name Player
 
 var movement_distance : int = 80
 const INPUTS : Dictionary[String, Vector2]= { "move_up" : Vector2.UP, "move_right" : Vector2.RIGHT, "move_left" : Vector2.LEFT, "move_down" : Vector2.DOWN }
@@ -12,6 +13,7 @@ var bounds : Vector2 = Vector2.ZERO
 var current_position_in_grid : Vector2 = Vector2.ZERO
 var centre_position_in_grid : Vector2 = Vector2.ZERO
 var starting_position : Vector2 = Vector2.ZERO
+var controls_enabled : bool = true
 
 signal level_completed
 signal new_centre_position(position: Vector2)
@@ -47,34 +49,41 @@ func move_position(key: Vector2) -> void:
 func handle_movement_key(event: InputEvent, keys: Dictionary[String, Vector2]) -> void:
 	for key in keys.keys():
 		if not is_moving and event.is_action_pressed(key) and is_movement_possible(keys[key]):
-			is_moving = true
-			var tween = create_tween()
 			move_position(keys[key])
 			
 			if has_moved:
-				tween.tween_property(self, "position", centre + keys[key] * movement_distance, animation_speed).set_trans(Tween.TRANS_SINE)
+				_tween_to_new_position(centre + keys[key] * movement_distance)
 			else:
-				tween.tween_property(self, "position", position + keys[key] * movement_distance, animation_speed).set_trans(Tween.TRANS_SINE)
+				_tween_to_new_position(position + keys[key] * movement_distance)
 
-			await tween.finished
-			is_moving = false
 			_check_if_game_over()
 			return
+
+func _tween_to_new_position(new_position) -> void:
+	is_moving = false
+	var tween = create_tween()
+	
+	tween.tween_property(self, "position", new_position, animation_speed).set_trans(Tween.TRANS_SINE)
+	await tween.finished
+	is_moving = false
 
 func _check_if_game_over() -> void:
 	if centre_position_in_grid.x == bounds.x - 1:
 		print("Level Completed")
 		level_completed.emit()
+		new_centre_position.emit(centre_position_in_grid + Vector2.RIGHT)
+		controls_enabled = true
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("interact"):
-		_move_centre()
-		return
+	if controls_enabled:
+		if event.is_action_pressed("interact"):
+			_move_centre()
+			return
 
-	if has_moved:
-		handle_movement_key(event, INPUTS)
-	else:
-		handle_movement_key(event, UNMOVED_INPUTS)
+		if has_moved:
+			handle_movement_key(event, INPUTS)
+		else:
+			handle_movement_key(event, UNMOVED_INPUTS)
 
 func _move_centre() -> void:
 	has_moved = true
@@ -82,7 +91,7 @@ func _move_centre() -> void:
 	centre_position_in_grid = current_position_in_grid
 	new_centre_position.emit(centre_position_in_grid)
 	current_position_in_grid = centre_position_in_grid + Vector2.RIGHT
-	position = centre + movement_distance * Vector2.RIGHT
+	_tween_to_new_position( centre + movement_distance * Vector2.RIGHT )
 	_check_if_game_over()
 	# print("Centre 				= %s" % centre)
 	# print("Centre Position		= %s" % centre_position_in_grid)
