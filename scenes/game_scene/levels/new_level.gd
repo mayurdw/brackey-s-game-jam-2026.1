@@ -3,13 +3,23 @@ extends Node2D
 @export var starting_position := Vector2(256, 256)
 @export var manager : PackedScene = load("res://scenes/game_scene/tile_manager/Tile_manager.tscn")
 @export var player : PackedScene = preload("res://scenes/game_scene/player/player.tscn")
-
 @export var levels : Dictionary[int, LevelDetails] = {
-	1 : LevelDetails.new([[0, 0, 2, 0], [0, 1, 1, 0], [0, 0, 1, 1], [1, 1, 1, 0]], 64, 16)
+	1 : LevelDetails.new([
+		[0, 0, 1, 0],
+		[0, 1, 1, 0],
+		[0, 0, 1, 1],
+		[1, 1, 1, 0]],
+		80,
+		16)
 }
 
+var tile_manager : TileManager
+
+var connections : Array[Vector2]
+
+
 func _ready() -> void:
-	var tile_manager = manager.instantiate()
+	tile_manager = manager.instantiate()
 	var p = player.instantiate()
 
 	tile_manager.position = Vector2.ZERO
@@ -19,4 +29,14 @@ func _ready() -> void:
 	tile_manager.level = levels[1]
 	add_child(tile_manager)
 	add_child(p)
+
+	p.connect("new_centre_position", _new_center_position)
+	p.connect("level_completed", _level_completed)
 	tile_manager.populate()
+
+func _new_center_position(centre_position: Vector2) -> void:
+	connections.append(centre_position)
+	tile_manager.new_centre(centre_position)
+
+func _level_completed() -> void:
+	pass

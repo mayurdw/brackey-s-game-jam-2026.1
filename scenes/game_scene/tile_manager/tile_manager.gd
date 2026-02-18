@@ -4,11 +4,28 @@ class_name TileManager
 @export var tile : PackedScene = preload("res://scenes/game_scene/tile_manager/Tile.tscn")
 @export var level: LevelDetails
 @export var tile_scale : Vector2 = Vector2.ONE
+var instances : Array[Array]
 
 func populate() -> void:
 	for x in range(0, level.grid_size.size()):
-		for y in range(0, level.grid_size.size()):
+		var row : Array[Tile] = []
+		for y in range(0, level.grid_size[0].size()):
 			var instance := tile.instantiate()
 			instance.position = Vector2.ZERO + (level.tile_size + level.inter_tile_gap)* Vector2(x + 1, y + 1)
 			instance.scale = tile_scale
+			instance.tile_type = level.grid_size[y][x]
+			row.append(instance)
 			add_child(instance)
+		instances.append(row)
+
+func new_centre(centre: Vector2) -> void:
+	print("Centre at new coordinates = %s" % centre)
+	var borders := [centre + Vector2.UP, centre + Vector2.DOWN, centre + Vector2.RIGHT, centre + Vector2.LEFT]
+	
+	for p in borders:
+		if is_valid(p):
+			print("Positions = %s" % p)
+			instances[p.x][p.y].flash_status()
+
+func is_valid(border: Vector2) -> bool:
+	return border.y >= 0 and border.y <= instances.size() - 1 and border.x >= 0 and border.x <= instances[0].size() - 1

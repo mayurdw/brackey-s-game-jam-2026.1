@@ -1,6 +1,5 @@
 extends Area2D
 
-# TODO: This needs to come from the level manager
 var movement_distance : int = 80
 const INPUTS : Dictionary[String, Vector2]= { "move_up" : Vector2.UP, "move_right" : Vector2.RIGHT, "move_left" : Vector2.LEFT, "move_down" : Vector2.DOWN }
 const UNMOVED_INPUTS : Dictionary[String, Vector2]= { "move_up" : Vector2.UP, "move_down" : Vector2.DOWN }
@@ -21,6 +20,7 @@ func set_starting_position(movement_distance: int, grid_size: Vector2, starting_
 	has_moved = false
 	centre = starting_position
 	self.starting_position = starting_position
+	self.movement_distance = movement_distance
 	position = centre
 	bounds = grid_size
 
