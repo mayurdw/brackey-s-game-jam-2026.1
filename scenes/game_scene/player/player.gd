@@ -12,10 +12,15 @@ var has_moved: bool = false
 var bounds : Vector2 = Vector2.ZERO
 var current_position_in_grid : Vector2 = Vector2.ZERO
 var centre_position_in_grid : Vector2 = Vector2.ZERO
+var starting_position : Vector2 = Vector2.ZERO
 
-func set_starting_position(movement_distance: int, grid_size: Vector2, centre: Vector2) -> void:
+signal level_completed
+signal new_centre_position(position: Vector2)
+
+func set_starting_position(movement_distance: int, grid_size: Vector2, starting_position: Vector2) -> void:
 	has_moved = false
-	centre = centre
+	centre = starting_position
+	self.starting_position = starting_position
 	position = centre
 	bounds = grid_size
 
@@ -34,7 +39,10 @@ func is_movement_possible(key: Vector2) -> bool:
 			_: return false
 
 func move_position(key: Vector2) -> void:
-	current_position_in_grid = centre_position_in_grid + key
+	if has_moved:
+		current_position_in_grid = centre_position_in_grid + key
+	else:
+		current_position_in_grid += key
 
 func handle_movement_key(event: InputEvent, keys: Dictionary[String, Vector2]) -> void:
 	for key in keys.keys():
@@ -50,7 +58,13 @@ func handle_movement_key(event: InputEvent, keys: Dictionary[String, Vector2]) -
 
 			await tween.finished
 			is_moving = false
+			_check_if_game_over()
 			return
+
+func _check_if_game_over() -> void:
+	if centre_position_in_grid.x == bounds.x - 1:
+		print("Level Completed")
+		level_completed.emit()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact"):
@@ -66,5 +80,10 @@ func _move_centre() -> void:
 	has_moved = true
 	centre = position
 	centre_position_in_grid = current_position_in_grid
+	new_centre_position.emit(centre_position_in_grid)
 	current_position_in_grid = centre_position_in_grid + Vector2.RIGHT
 	position = centre + movement_distance * Vector2.RIGHT
+	_check_if_game_over()
+	# print("Centre 				= %s" % centre)
+	# print("Centre Position		= %s" % centre_position_in_grid)
+	# print("Translated Centre 	= %s" % (starting_position + centre_position_in_grid * movement_distance))
