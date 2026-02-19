@@ -30,6 +30,10 @@ func _check_tile_status(centre: Vector2) -> bool:
 	
 	return true
 
+func activate_starting_tiles() -> void:
+	for x in range(0, level.grid_size.size()):
+		instances[0][x].activate_tile()
+
 func toggle_status(status: bool) -> void:
 	for x in range(0, level.grid_size.size()):
 		for y in range(0, level.grid_size[0].size()):

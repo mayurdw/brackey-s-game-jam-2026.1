@@ -84,6 +84,7 @@ func _on_start_timer_timeout() -> void:
 		game_timer.one_shot = false
 		game_timer.start(1.0)
 		tile_manager.toggle_status(true)
+		tile_manager.activate_starting_tiles()
 		start_timer.stop()
 
 func _on_game_timer_timeout() -> void:

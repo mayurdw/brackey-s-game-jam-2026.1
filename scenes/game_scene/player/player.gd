@@ -54,9 +54,9 @@ func handle_movement_key(event: InputEvent, keys: Dictionary[String, Vector2]) -
 			move_position(keys[key])
 			
 			if has_moved:
-				_tween_to_new_position(centre + keys[key] * movement_distance)
+				_tween_to_new_position(starting_position + centre_position_in_grid * movement_distance)
 			else:
-				_tween_to_new_position(position + keys[key] * movement_distance)
+				_tween_to_new_position(starting_position + current_position_in_grid * movement_distance)
 
 			_check_if_game_over()
 			return
@@ -95,6 +95,3 @@ func _move_centre() -> void:
 	current_position_in_grid = centre_position_in_grid + Vector2.RIGHT
 	_tween_to_new_position( centre + movement_distance * Vector2.RIGHT )
 	_check_if_game_over()
-	# print("Centre 				= %s" % centre)
-	# print("Centre Position		= %s" % centre_position_in_grid)
-	# print("Translated Centre 	= %s" % (starting_position + centre_position_in_grid * movement_distance))
