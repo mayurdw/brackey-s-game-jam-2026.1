@@ -5,8 +5,10 @@
 [node name="OverlaidWindow" unique_id=2002109630 instance=ExtResource("1_b2dkv")]
 custom_minimum_size = Vector2(420, 200)
 update_content = true
-text = "Click the Win button to progress.
-Click the Lose button to try again."
+text = "Get to the other side of the room. Select starting tile by 'SELECT' key.
+
+You can only move UP, DOWN until you set starting tile."
+close_button_text = "Next"
 title = "Tutorial"
 title_font_size = 20
 
@@ -15,5 +17,9 @@ theme_override_font_sizes/font_size = 20
 text = "Tutorial"
 
 [node name="DescriptionLabel" parent="ContentContainer/BoxContainer/BodyMargin" parent_id_path=PackedInt32Array(590613964) index="0" unique_id=617407155]
-text = "Click the Win button to progress.
-Click the Lose button to try again."
+text = "Get to the other side of the room. Select starting tile by 'SELECT' key.
+
+You can only move UP, DOWN until you set starting tile."
+
+[node name="CloseButton" parent="ContentContainer/BoxContainer/MenuButtonsMargin/MenuButtons" parent_id_path=PackedInt32Array(1371114575) index="0" unique_id=314526102]
+text = "Next"

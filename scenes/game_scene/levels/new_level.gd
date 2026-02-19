@@ -5,9 +5,9 @@ extends Node2D
 @export var player : PackedScene = preload("res://scenes/game_scene/player/player.tscn")
 @export var levels : Dictionary[int, LevelDetails] = {
 	1 : LevelDetails.new([
-		[0, 0, 1, 0],
-		[0, 1, 1, 0],
-		[0, 0, 1, 1],
+		[1, 0, 1, 0],
+		[1, 1, 1, 0],
+		[1, 0, 1, 1],
 		[1, 1, 1, 0]],
 		80,
 		16)
