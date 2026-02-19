@@ -54,7 +54,7 @@ func handle_movement_key(event: InputEvent, keys: Dictionary[String, Vector2]) -
 			move_position(keys[key])
 			
 			if has_moved:
-				_tween_to_new_position(starting_position + centre_position_in_grid * movement_distance)
+				_tween_to_new_position(starting_position + current_position_in_grid * movement_distance)
 			else:
 				_tween_to_new_position(starting_position + current_position_in_grid * movement_distance)
 
@@ -64,6 +64,7 @@ func handle_movement_key(event: InputEvent, keys: Dictionary[String, Vector2]) -
 func _tween_to_new_position(new_position) -> void:
 	is_moving = false
 	var tween = create_tween()
+	print("New Position %s" % new_position)
 	
 	tween.tween_property(self, "position", new_position, animation_speed).set_trans(Tween.TRANS_SINE)
 	await tween.finished
@@ -93,5 +94,5 @@ func _move_centre() -> void:
 	centre_position_in_grid = current_position_in_grid
 	new_centre_position.emit(centre_position_in_grid)
 	current_position_in_grid = centre_position_in_grid + Vector2.RIGHT
-	_tween_to_new_position( centre + movement_distance * Vector2.RIGHT )
+	_tween_to_new_position( starting_position + current_position_in_grid * movement_distance )
 	_check_if_game_over()
