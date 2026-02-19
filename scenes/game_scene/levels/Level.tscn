@@ -2,6 +2,12 @@
 
 [ext_resource type="Script" uid="uid://ben6ycqxypa36" path="res://scenes/game_scene/levels/new_level.gd" id="1_ydxa7"]
 
-[node name="Level" type="Node2D" unique_id=97832403 node_paths=PackedStringArray("levels")]
+[node name="Level" type="Node2D" unique_id=97832403]
 script = ExtResource("1_ydxa7")
-levels = {}
+
+[node name="Start Timer" type="Timer" parent="." unique_id=1639074411]
+
+[node name="Game Timer" type="Timer" parent="." unique_id=1281120677]
+
+[connection signal="timeout" from="Start Timer" to="." method="_on_start_timer_timeout"]
+[connection signal="timeout" from="Game Timer" to="." method="_on_game_timer_timeout"]

@@ -27,14 +27,20 @@ func _check_tile_status(centre: Vector2) -> bool:
 	
 	return true
 
+func toggle_status(status: bool) -> void:
+	for x in range(0, level.grid_size.size()):
+		for y in range(0, level.grid_size[0].size()):
+			if status:
+				instances[x][y].hide_data()
+			else:
+				instances[x][y].set_data()
+
 func new_centre(centre: Vector2) -> void:
-	print("Centre at new coordinates = %s" % centre)
 	if _check_tile_status(centre):
 		var borders := [centre + Vector2.UP, centre + Vector2.DOWN, centre + Vector2.RIGHT, centre + Vector2.LEFT]
 		
 		for p in borders:
 			if is_valid(p):
-				print("Positions = %s" % p)
 				instances[p.x][p.y].flash_status()
 
 func is_valid(border: Vector2) -> bool:

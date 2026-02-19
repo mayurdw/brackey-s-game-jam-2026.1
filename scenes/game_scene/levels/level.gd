@@ -7,6 +7,8 @@ signal level_changed(level_path : String)
 
 ## Optional path to the next level if using an open world level system.
 @export_file("*.tscn") var next_level_path : String
+@onready var remaining_timer: Label = $"MarginContainer/Remaining Timer"
+@onready var game_timer: Label = $"MarginContainer/VBoxContainer/Game Timer"
 
 var level_state : LevelState
 
@@ -35,3 +37,16 @@ func _on_color_picker_button_color_changed(color : Color) -> void:
 
 func _on_tutorial_button_pressed() -> void:
 	open_tutorials()
+
+
+func _on_level_game_time(current_time_in_secs: int) -> void:
+	var seconds :int = current_time_in_secs%60
+	var minutes :int = (current_time_in_secs/60)%60
+	
+	#returns a string with the format "HH:MM:SS"
+	game_timer.text = "%02d:%02d" % [minutes, seconds]
+
+func _on_level_remaining_start_count(remaining_time: int) -> void:
+	remaining_timer.text = "%d" % remaining_time
+	if remaining_time <= 0:
+		remaining_timer.hide()

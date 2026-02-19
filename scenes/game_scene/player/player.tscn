@@ -15,4 +15,3 @@ shape = SubResource("RectangleShape2D_tcwrj")
 position = Vector2(-40, -40)
 points = PackedVector2Array(0, 0, 80, 0, 80, 80, 0, 80)
 closed = true
-default_color = Color(0, 0, 0, 1)

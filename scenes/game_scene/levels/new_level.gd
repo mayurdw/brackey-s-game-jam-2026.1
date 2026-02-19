@@ -27,12 +27,18 @@ var levels : Dictionary[int, LevelDetails] = {
 }
 @export var level: int
 
+@onready var start_timer: Timer = $"Start Timer"
+@onready var game_timer: Timer = $"Game Timer"
+
 var tile_manager : TileManager
 var p : Player
 var connections : Array[Vector2]
+var start_count : int = 3
 
 signal level_lost
 signal level_won
+signal remaining_start_count(remaining_time: int)
+signal game_time(current_time_in_secs: int)
 
 func _ready() -> void:
 	tile_manager = manager.instantiate()
@@ -53,6 +59,9 @@ func _ready() -> void:
 	p.connect("level_completed", _level_completed)
 	tile_manager.connect("unsafe_tile", _game_over)
 	tile_manager.populate()
+	start_timer.start()
+	p.controls_enabled = false
+	tile_manager.toggle_status(false)
 
 func _game_over() -> void:
 	p.controls_enabled = false
@@ -65,3 +74,18 @@ func _new_center_position(centre_position: Vector2) -> void:
 func _level_completed() -> void:
 	p.controls_enabled = false
 	level_won.emit()
+
+
+func _on_start_timer_timeout() -> void:
+	start_count -= 1
+	remaining_start_count.emit(start_count)
+	if start_count <= 0:
+		p.controls_enabled = true
+		game_timer.one_shot = false
+		game_timer.start(1.0)
+		tile_manager.toggle_status(true)
+		start_timer.stop()
+
+func _on_game_timer_timeout() -> void:
+	start_count += 1
+	game_time.emit(start_count)

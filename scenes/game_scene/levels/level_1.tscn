@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://qi4qdfy4cte8" path="res://scenes/game_scene/levels/level.gd" id="1_623lg"]
 [ext_resource type="PackedScene" uid="uid://sfltlay2e84w" path="res://scenes/game_scene/levels/Level.tscn" id="3_bsimd"]
 [ext_resource type="Texture2D" uid="uid://e551iq12vxfg" path="res://assets/keyboard_arrows_horizontal.png" id="3_fmabn"]
-[ext_resource type="Script" uid="uid://ch8aaykixbwn5" path="res://scenes/game_scene/input_display_label.gd" id="3_pmyid"]
 [ext_resource type="Texture2D" uid="uid://bwe6u6tmro5vi" path="res://assets/keyboard_e.png" id="4_85t3v"]
 [ext_resource type="Script" uid="uid://bll85ag2um7hl" path="res://scenes/game_scene/tutorial_manager.gd" id="4_bsimd"]
 [ext_resource type="PackedScene" uid="uid://ks83y4cfd5a5" path="res://scenes/game_scene/tutorials/tutorial_1.tscn" id="5_fmabn"]
@@ -37,19 +36,26 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 32
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Remaining Timer" type="Label" parent="MarginContainer" unique_id=1591263991]
+layout_mode = 2
+theme_override_font_sizes/font_size = 96
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1666223033]
 layout_mode = 2
-theme_override_constants/separation = 16
+theme_override_constants/separation = 8
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=153752389]
+[node name="Game Timer" type="Label" parent="MarginContainer/VBoxContainer" unique_id=153752389]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Example Level #1"
+theme_override_font_sizes/font_size = 24
+text = "00:00"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -62,11 +68,16 @@ size_flags_vertical = 3
 
 [node name="Level" parent="MarginContainer/VBoxContainer/BoxContainer" unique_id=97832403 instance=ExtResource("3_bsimd")]
 
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=1896993322]
+layout_mode = 2
+
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=420490874]
 layout_mode = 2
+alignment = 1
 
 [node name="TutorialButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=263503015]
 layout_mode = 2
+size_flags_horizontal = 2
 text = "Tutorial"
 
 [node name="Navigation Icons" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=697983011]
@@ -86,17 +97,13 @@ expand_mode = 2
 layout_mode = 2
 text = "Select"
 
-[node name="InputDisplayLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=829190659]
-layout_mode = 2
-size_flags_horizontal = 3
-horizontal_alignment = 1
-script = ExtResource("3_pmyid")
-
 [node name="TutorialManager" type="Node" parent="." unique_id=448883273]
 unique_name_in_owner = true
 script = ExtResource("4_bsimd")
 tutorial_scenes = Array[PackedScene]([ExtResource("5_fmabn"), ExtResource("6_pmyid"), ExtResource("7_bsimd")])
 
+[connection signal="game_time" from="MarginContainer/VBoxContainer/BoxContainer/Level" to="." method="_on_level_game_time"]
 [connection signal="level_lost" from="MarginContainer/VBoxContainer/BoxContainer/Level" to="." method="_on_lose_button_pressed"]
 [connection signal="level_won" from="MarginContainer/VBoxContainer/BoxContainer/Level" to="." method="_on_win_button_pressed"]
+[connection signal="remaining_start_count" from="MarginContainer/VBoxContainer/BoxContainer/Level" to="." method="_on_level_remaining_start_count"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/TutorialButton" to="." method="_on_tutorial_button_pressed"]
