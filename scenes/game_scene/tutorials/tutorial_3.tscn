@@ -3,7 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://6gdbfi0172ji" path="res://addons/maaacks_game_template/base/nodes/windows/overlaid_window.tscn" id="1_hy5iy"]
 
 [node name="OverlaidWindow" unique_id=1122261693 instance=ExtResource("1_hy5iy")]
+process_mode = 3
 custom_minimum_size = Vector2(420, 200)
+pauses_game = true
 update_content = true
 text = "You can always open the tutorial again to read instructions. "
 title = "Tutorial"

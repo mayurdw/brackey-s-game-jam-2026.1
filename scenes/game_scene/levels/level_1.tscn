@@ -54,9 +54,8 @@ vertical_alignment = 1
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=366526319]
 layout_mode = 2
 
-[node name="Level" parent="MarginContainer/VBoxContainer" unique_id=97832403 node_paths=PackedStringArray("levels") instance=ExtResource("3_bsimd")]
+[node name="Level" parent="MarginContainer/VBoxContainer" unique_id=97832403 instance=ExtResource("3_bsimd")]
 position = Vector2(0, 81)
-levels = {}
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=420490874]
 layout_mode = 2
@@ -77,4 +76,6 @@ unique_name_in_owner = true
 script = ExtResource("4_bsimd")
 tutorial_scenes = Array[PackedScene]([ExtResource("5_fmabn"), ExtResource("6_pmyid"), ExtResource("7_bsimd")])
 
+[connection signal="level_lost" from="MarginContainer/VBoxContainer/Level" to="." method="_on_lose_button_pressed"]
+[connection signal="level_won" from="MarginContainer/VBoxContainer/Level" to="." method="_on_win_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/TutorialButton" to="." method="_on_tutorial_button_pressed"]
