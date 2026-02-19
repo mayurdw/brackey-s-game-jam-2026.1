@@ -14,7 +14,6 @@ var levels : Dictionary[int, LevelDetails] = {
 	1 : LevelDetails.new([
 		[0, 1, 1, 0, 1, 1, 1, 0],
 		[1, 1, 0, 1, 0, 0, 1, 0],
-		[0, 1, 1, 0, 1, 0, 0, 0],
 		[0, 1, 1, 1, 1, 0, 0, 0],
 		[0, 0, 1, 1, 0, 1, 0, 1],
 		[1, 0, 0, 1, 1, 1, 1, 0],
@@ -22,7 +21,7 @@ var levels : Dictionary[int, LevelDetails] = {
 		[1, 1, 0, 0, 1, 1, 1, 0],
 		[0, 1, 0, 0, 1, 0, 1, 1]
 		],
-		80,
+		48,
 		16)
 }
 @export var level: int
@@ -49,7 +48,8 @@ func _ready() -> void:
 	p.set_starting_position(
 		levels[level].gap, 
 		Vector2(levels[level].grid_size.size(), levels[level].grid_size[0].size()), 
-		Vector2(levels[level].gap, levels[level].gap)
+		Vector2(levels[level].gap, levels[level].gap),
+		levels[level].tile_size
 	)
 	tile_manager.level = levels[level]
 	add_child(tile_manager)

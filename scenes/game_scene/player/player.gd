@@ -18,13 +18,15 @@ var controls_enabled : bool = true
 signal level_completed
 signal new_centre_position(position: Vector2)
 
-func set_starting_position(movement_distance: int, grid_size: Vector2, starting_position: Vector2) -> void:
+func set_starting_position(movement_distance: int, grid_size: Vector2, starting_position: Vector2, tile_size: int) -> void:
 	has_moved = false
 	centre = starting_position
 	self.starting_position = starting_position
 	self.movement_distance = movement_distance
 	position = centre
 	bounds = grid_size
+	var ratio = tile_size / 80.0
+	scale = Vector2(ratio, ratio)
 
 func is_movement_possible(key: Vector2) -> bool:
 	if has_moved:
