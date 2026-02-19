@@ -20,13 +20,21 @@ func set_data() -> void:
 			unsafe.hide()
 
 func hide_data() -> void:
-	safe.hide()
-	unsafe.hide()
-	mask.show()
+	_on_timer_timeout()
+	inactivate_tile()
 
 func flash_status() -> void:
 	set_data()
 	timer.start(1.0)
+	activate_tile()
 
 func _on_timer_timeout() -> void:
-	hide_data()
+	safe.hide()
+	unsafe.hide()
+	mask.show()
+
+func activate_tile() -> void:
+	set_modulate(Color(1, 1, 1, 1))
+
+func inactivate_tile() -> void:
+	set_modulate(Color(1, 1, 1, 0.5))

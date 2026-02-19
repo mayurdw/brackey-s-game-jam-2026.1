@@ -41,13 +41,6 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Remaining Timer" type="Label" parent="MarginContainer" unique_id=1591263991]
-layout_mode = 2
-theme_override_font_sizes/font_size = 96
-text = "3"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1666223033]
 layout_mode = 2
 theme_override_constants/separation = 8
@@ -65,8 +58,10 @@ layout_mode = 2
 [node name="BoxContainer" type="BoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1029651382]
 layout_mode = 2
 size_flags_vertical = 3
+alignment = 1
 
 [node name="Level" parent="MarginContainer/VBoxContainer/BoxContainer" unique_id=97832403 instance=ExtResource("3_bsimd")]
+position = Vector2(256, 0)
 
 [node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=1896993322]
 layout_mode = 2
@@ -96,6 +91,13 @@ expand_mode = 2
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/Selector Label" unique_id=1373320853]
 layout_mode = 2
 text = "Select"
+
+[node name="Remaining Timer" type="Label" parent="MarginContainer" unique_id=1591263991]
+layout_mode = 2
+theme_override_font_sizes/font_size = 96
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="TutorialManager" type="Node" parent="." unique_id=448883273]
 unique_name_in_owner = true
