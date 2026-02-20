@@ -1,6 +1,79 @@
-[gd_scene format=3 uid="uid://sfltlay2e84w"]
+[gd_scene format=4 uid="uid://sfltlay2e84w"]
 
 [ext_resource type="Script" uid="uid://ben6ycqxypa36" path="res://scenes/game_scene/levels/new_level.gd" id="1_ydxa7"]
+[ext_resource type="Texture2D" uid="uid://tlm7l4g1gr74" path="res://assets/tiles/Walls/wall_lava_bottom(1).png" id="2_u3of0"]
+[ext_resource type="Texture2D" uid="uid://b5lnnirgcxx3a" path="res://assets/tiles/Walls/wall_lava_bottom(2).png" id="3_f6nvm"]
+[ext_resource type="Texture2D" uid="uid://d22mx1lb4kdcp" path="res://assets/tiles/Walls/wall_lava_bottom(3).png" id="4_ayksv"]
+[ext_resource type="Texture2D" uid="uid://bkul3p71the8g" path="res://assets/tiles/Walls/wall_lava_bottom(4).png" id="5_8t3cg"]
+[ext_resource type="Texture2D" uid="uid://cyms4jql7n7d8" path="res://assets/tiles/Walls/wall_lava_bottom(5).png" id="6_insme"]
+[ext_resource type="Texture2D" uid="uid://d3m4pmox1d2xe" path="res://assets/tiles/Walls/wall_lava_bottom(6).png" id="7_3bqyi"]
+[ext_resource type="Texture2D" uid="uid://ds6px8nus3w7g" path="res://assets/tiles/Walls/wall_lava_bottom(7).png" id="8_wf4b5"]
+[ext_resource type="Texture2D" uid="uid://dspf82p8kklki" path="res://assets/tiles/Walls/wall_lava_decoration_bottom(1).png" id="9_njdgd"]
+[ext_resource type="Texture2D" uid="uid://cbg7ratufhfl1" path="res://assets/tiles/Walls/wall_lava_decoration_bottom(3).png" id="10_bunjr"]
+[ext_resource type="Texture2D" uid="uid://by616ewvcdr28" path="res://assets/tiles/Walls/wall_lava_decoration_bottom(5).png" id="11_1l7ys"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1uwxy"]
+texture = ExtResource("2_u3of0")
+texture_region_size = Vector2i(106, 118)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ccsqo"]
+texture = ExtResource("3_f6nvm")
+texture_region_size = Vector2i(106, 118)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n2dvi"]
+texture = ExtResource("4_ayksv")
+texture_region_size = Vector2i(106, 119)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wrfx2"]
+texture = ExtResource("5_8t3cg")
+texture_region_size = Vector2i(105, 118)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_shbvj"]
+texture = ExtResource("6_insme")
+texture_region_size = Vector2i(105, 119)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a5ay7"]
+texture = ExtResource("7_3bqyi")
+texture_region_size = Vector2i(105, 119)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y6c5n"]
+texture = ExtResource("8_wf4b5")
+texture_region_size = Vector2i(106, 119)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3woh0"]
+texture = ExtResource("9_njdgd")
+texture_region_size = Vector2i(105, 119)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cilia"]
+texture = ExtResource("10_bunjr")
+texture_region_size = Vector2i(105, 119)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lpsku"]
+texture = ExtResource("11_1l7ys")
+texture_region_size = Vector2i(105, 119)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_gf4ai"]
+tile_size = Vector2i(106, 118)
+sources/0 = SubResource("TileSetAtlasSource_1uwxy")
+sources/1 = SubResource("TileSetAtlasSource_ccsqo")
+sources/2 = SubResource("TileSetAtlasSource_n2dvi")
+sources/3 = SubResource("TileSetAtlasSource_wrfx2")
+sources/4 = SubResource("TileSetAtlasSource_shbvj")
+sources/5 = SubResource("TileSetAtlasSource_a5ay7")
+sources/6 = SubResource("TileSetAtlasSource_y6c5n")
+sources/7 = SubResource("TileSetAtlasSource_3woh0")
+sources/8 = SubResource("TileSetAtlasSource_cilia")
+sources/9 = SubResource("TileSetAtlasSource_lpsku")
 
 [node name="Level" type="Node2D" unique_id=97832403]
 script = ExtResource("1_ydxa7")
@@ -8,6 +81,11 @@ script = ExtResource("1_ydxa7")
 [node name="Start Timer" type="Timer" parent="." unique_id=1639074411]
 
 [node name="Game Timer" type="Timer" parent="." unique_id=1281120677]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1579975423]
+scale = Vector2(0.5, 0.5)
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAABAAAABwAAAAAAAAABAAEAAwAAAAAAAAACAAAAAAAAAAAAAAACAAEAAAAAAAAAAAADAAAAAAAAAAAAAAADAAEAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAAFAAAACQAAAAAAAAAFAAEAAAAAAAAAAAAGAAAAAAAAAAAAAAAGAAEAAAAAAAAAAAAHAAAAAQAAAAAAAAAHAAEAAQAAAAAAAAAIAAAAAAAAAAAAAAAIAAEAAwAAAAAAAAAJAAAAAAAAAAAAAAAJAAEAAAAAAAAAAAAKAAAAAAAAAAAAAAAKAAEAAAAAAAAAAAALAAAABwAAAAAAAAALAAEAAAAAAAAAAAAMAAAAAAAAAAAAAAAMAAEAAAAAAAAAAAANAAAAAAAAAAAAAAANAAEAAQAAAAAAAAAOAAAAAAAAAAAAAAAOAAEAAQAAAAAAAAAPAAAACAAAAAAAAAAPAAEAAAAAAAAAAAAQAAAAAwAAAAAAAAAQAAEAAAAAAAAAAAARAAAAAAAAAAAAAAARAAEAAAAAAAAAAAASAAAAAAAAAAAAAAASAAEAAAAAAAAAAAATAAAABwAAAAAAAAATAAEAAQAAAAAAAAAUAAAAAQAAAAAAAAAUAAEAAwAAAAAAAAAVAAAAAAAAAAAAAAAVAAEAAAAAAAAAAAAWAAAACQAAAAAAAAAWAAEAAAAAAAAAAAAXAAAAAAAAAAAAAAAXAAEAAQAAAAAAAAD9/wAAAAAAAAAAAAD9/wEAAAAAAAAAAAD+/wAAAAAAAAAAAAD+/wEAAAAAAAAAAAD//wAAAAAAAAAAAAD//wEAAwAAAAAAAAAYAAEAAwAAAAAAAAAYAAAABwAAAAAAAAA=")
+tile_set = SubResource("TileSet_gf4ai")
 
 [connection signal="timeout" from="Start Timer" to="." method="_on_start_timer_timeout"]
 [connection signal="timeout" from="Game Timer" to="." method="_on_game_timer_timeout"]
