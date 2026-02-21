@@ -16,16 +16,25 @@ var selector_position : Vector2 = Vector2.ZERO
 var controls_enabled : bool = true
 
 signal level_completed
+signal level_failed
 
 const INPUTS : Dictionary[String, Vector2]= { "move_up" : Vector2.UP, "move_right" : Vector2.RIGHT, "move_left" : Vector2.LEFT, "move_down" : Vector2.DOWN }
 const UNMOVED_INPUTS : Dictionary[String, Vector2]= { "move_up" : Vector2.UP, "move_down" : Vector2.DOWN }
 
-func _game_over_movement() -> void:
+func _show_blood_animation() -> void:
 	pass
+
+func _game_over_movement() -> void:
+	print("Game Over")
+	var tween = create_tween()
+	tween.tween_property(character, "position", selector.global_position, animation_speed).set_trans(Tween.TRANS_SINE)
+	await tween.finished
+	_show_blood_animation()
+	level_failed.emit()
 
 func _trigger_character_movement() -> void:
 	controls_enabled = false
-	if traps.has(_get_name()):
+	if traps.has(_get_id()):
 		_game_over_movement()
 	else:
 		var tween = create_tween()
@@ -36,9 +45,9 @@ func _trigger_character_movement() -> void:
 func _move_centre() -> void:
 	has_moved = true
 	if is_movement_possible(Vector2.RIGHT):
+		_trigger_character_movement()
 		selector_position += Vector2.RIGHT
 		_tween_to_new_position()
-		_trigger_character_movement()
 	else:
 		level_completed.emit()
 
@@ -62,18 +71,19 @@ func _move_position ( key: Vector2 ) -> void:
 	else:
 		selector_position += key
 
+func _get_id() -> String:
+	return "%d%d" % [selector_position.y, selector_position.x]
+
 func _get_name() -> String:
-	return "Trap Zone/%d%d" % [selector_position.y, selector_position.x]
+	return "Trap Zone/%s" % _get_id()
 
 func _tween_to_new_position() -> void:
 	var tween = create_tween()
 	var target_position = get_node(_get_name()).position
 
 	is_moving = true
-	print("Selector %s, position = %s" % [selector, selector_position])
 	tween.tween_property(selector, "position", target_position, animation_speed).set_trans(Tween.TRANS_SINE)
 	await tween.finished
-	print("Selector %s, position = %s" % [selector, selector_position])
 	is_moving = false
 
 func handle_movement_key(event: InputEvent, key: Dictionary[String, Vector2]) -> void:
