@@ -6,6 +6,7 @@ extends Node2D
 
 @onready var selector: Sprite2D = $"Trap Zone/Selector"
 @onready var character: Sprite2D = $Character
+@onready var blood: GPUParticles2D = $Character/Blood
 
 var animation_speed : float = 0.25
 var is_moving : bool = false
@@ -22,7 +23,7 @@ const INPUTS : Dictionary[String, Vector2]= { "move_up" : Vector2.UP, "move_righ
 const UNMOVED_INPUTS : Dictionary[String, Vector2]= { "move_up" : Vector2.UP, "move_down" : Vector2.DOWN }
 
 func _show_blood_animation() -> void:
-	pass
+	blood.emitting = true
 
 func _game_over_movement() -> void:
 	print("Game Over")

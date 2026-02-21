@@ -15,6 +15,14 @@ texture = ExtResource("3_h2clf")
 [sub_resource type="TileSet" id="TileSet_iyses"]
 sources/0 = SubResource("TileSetAtlasSource_q51th")
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_iyses"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 30.0
+initial_velocity_max = 90.0
+gravity = Vector3(0, 0, 0)
+color = Color(1.0039216, 0.2875431, 0.46860582, 1)
+
 [node name="Temp" type="Node2D" unique_id=1019181701]
 script = ExtResource("1_f68d1")
 traps = Array[String](["01", "03", "13", "21", "33"])
@@ -117,3 +125,13 @@ centered = false
 position = Vector2(64, 128)
 texture = ExtResource("7_iyses")
 centered = false
+
+[node name="Blood" type="GPUParticles2D" parent="Character" unique_id=1963013641]
+position = Vector2(8, 8)
+emitting = false
+amount = 30
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_iyses")
