@@ -2,24 +2,10 @@ extends Node2D
 
 @export var rows: int = 4
 @export var columns: int = 4
+@export var traps: Array[String] = []
 
-@onready var _00: Sprite2D = $"Trap Zone/00"
-@onready var _01: Sprite2D = $"Trap Zone/01"
-@onready var _02: Sprite2D = $"Trap Zone/02"
-@onready var _03: Sprite2D = $"Trap Zone/03"
-@onready var _10: Sprite2D = $"Trap Zone/10"
-@onready var _11: Sprite2D = $"Trap Zone/11"
-@onready var _12: Sprite2D = $"Trap Zone/12"
-@onready var _13: Sprite2D = $"Trap Zone/13"
-@onready var _20: Sprite2D = $"Trap Zone/20"
-@onready var _21: Sprite2D = $"Trap Zone/21"
-@onready var _22: Sprite2D = $"Trap Zone/22"
-@onready var _23: Sprite2D = $"Trap Zone/23"
-@onready var _30: Sprite2D = $"Trap Zone/30"
-@onready var _31: Sprite2D = $"Trap Zone/31"
-@onready var _32: Sprite2D = $"Trap Zone/32"
-@onready var _33: Sprite2D = $"Trap Zone/33"
 @onready var selector: Sprite2D = $"Trap Zone/Selector"
+@onready var character: Sprite2D = $Character
 
 var animation_speed : float = 0.25
 var is_moving : bool = false
@@ -29,11 +15,32 @@ var selector_position : Vector2 = Vector2.ZERO
 # TODO: Change this later
 var controls_enabled : bool = true
 
+signal level_completed
+
 const INPUTS : Dictionary[String, Vector2]= { "move_up" : Vector2.UP, "move_right" : Vector2.RIGHT, "move_left" : Vector2.LEFT, "move_down" : Vector2.DOWN }
 const UNMOVED_INPUTS : Dictionary[String, Vector2]= { "move_up" : Vector2.UP, "move_down" : Vector2.DOWN }
 
-func _move_centre() -> void:
+func _game_over_movement() -> void:
 	pass
+
+func _trigger_character_movement() -> void:
+	controls_enabled = false
+	if traps.has(_get_name()):
+		_game_over_movement()
+	else:
+		var tween = create_tween()
+		tween.tween_property(character, "position", selector.global_position, animation_speed).set_trans(Tween.TRANS_SINE)
+		await tween.finished
+		controls_enabled = true
+
+func _move_centre() -> void:
+	has_moved = true
+	if is_movement_possible(Vector2.RIGHT):
+		selector_position += Vector2.RIGHT
+		_tween_to_new_position()
+		_trigger_character_movement()
+	else:
+		level_completed.emit()
 
 func is_movement_possible(key: Vector2) -> bool:
 	if has_moved:
@@ -63,8 +70,10 @@ func _tween_to_new_position() -> void:
 	var target_position = get_node(_get_name()).position
 
 	is_moving = true
+	print("Selector %s, position = %s" % [selector, selector_position])
 	tween.tween_property(selector, "position", target_position, animation_speed).set_trans(Tween.TRANS_SINE)
 	await tween.finished
+	print("Selector %s, position = %s" % [selector, selector_position])
 	is_moving = false
 
 func handle_movement_key(event: InputEvent, key: Dictionary[String, Vector2]) -> void:
