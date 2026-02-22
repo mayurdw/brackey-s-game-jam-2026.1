@@ -9,11 +9,11 @@ extends Node2D
 @onready var character: Sprite2D = $Character
 @onready var blood: GPUParticles2D = $Character/Blood
 @onready var timer: Timer = $Timer
-@onready var other_character: Sprite2D = $"Other Character"
 @onready var end_00: Sprite2D = $"End 00"
 @onready var end_01: Sprite2D = $"End 01"
 @onready var end_02: Sprite2D = $"End 02"
 @onready var end_03: Sprite2D = $"End 03"
+@onready var other_character: Node2D = $"Other Character"
 
 var animation_speed : float = 0.25
 var is_moving : bool = false
@@ -100,7 +100,7 @@ func _end_of_level_celebrations() -> void:
 	var target_position = get_node("End 0%s" % (selector_position.y - 1 as int)).global_position
 
 	tween.tween_property(character, "position", target_position, animation_speed).set_trans(Tween.TRANS_SINE)
-	path_tiles.append(target_position)
+	path_tiles.append(target_position - Vector2(16, 0))
 	await tween.finished
 	_show_other_characters_moving()
 
