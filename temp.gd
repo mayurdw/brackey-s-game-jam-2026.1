@@ -3,29 +3,44 @@ extends Node2D
 @export var rows: int = 4
 @export var columns: int = 4
 @export var traps: Array[String] = []
+@export var start_time: int = 3
 
 @onready var selector: Sprite2D = $"Trap Zone/Selector"
 @onready var character: Sprite2D = $Character
 @onready var blood: GPUParticles2D = $Character/Blood
+@onready var timer: Timer = $Timer
+@onready var other_character: Sprite2D = $"Other Character"
+@onready var end_00: Sprite2D = $"End 00"
+@onready var end_01: Sprite2D = $"End 01"
+@onready var end_02: Sprite2D = $"End 02"
+@onready var end_03: Sprite2D = $"End 03"
 
 var animation_speed : float = 0.25
 var is_moving : bool = false
 var has_moved : bool = false
 var centre_position_in_grid : Vector2 = Vector2.ZERO
 var selector_position : Vector2 = Vector2.ZERO
-# TODO: Change this later
 var controls_enabled : bool = true
 var active_tiles : Array[Vector2] = []
+var game_time : int = 0
+var path_tiles : Array[Vector2] = []
 
-signal level_completed
-signal level_failed
+signal level_won(level_path: String)
+signal level_lost
 
 const INPUTS : Dictionary[String, Vector2]= { "move_up" : Vector2.UP, "move_right" : Vector2.RIGHT, "move_left" : Vector2.LEFT, "move_down" : Vector2.DOWN }
 const UNMOVED_INPUTS : Dictionary[String, Vector2]= { "move_up" : Vector2.UP, "move_down" : Vector2.DOWN }
 
 func _ready() -> void:
-	_set_tiles_inactive()
-	_set_active_tiles()
+	controls_enabled = false
+	timer.start(1.0)
+
+func _on_timer_timeout() -> void:
+	start_time -= 1
+	if not start_time > 0:
+		controls_enabled = true
+		_set_tiles_inactive()
+		_set_active_tiles()
 
 func _show_blood_animation() -> void:
 	blood.emitting = true
@@ -36,7 +51,7 @@ func _game_over_movement() -> void:
 	tween.tween_property(character, "position", selector.global_position, animation_speed).set_trans(Tween.TRANS_SINE)
 	await tween.finished
 	_show_blood_animation()
-	level_failed.emit()
+	level_lost.emit()
 
 func _trigger_character_movement() -> void:
 	if traps.has(_get_selection_position()):
@@ -72,11 +87,29 @@ func _set_tiles_inactive() -> void:
 			if not active_tiles.has(grid_position):
 				_toggle_tile_status(false, grid_position)
 
+func _show_other_characters_moving() -> void:
+	for i in path_tiles:
+		var tween = create_tween()
+		tween.tween_property(other_character, "position", i, animation_speed).set_trans(Tween.TRANS_SINE)
+		await tween.finished
+	level_won.emit()
+
+func _end_of_level_celebrations() -> void:
+	controls_enabled = false
+	var tween = create_tween()
+	var target_position = get_node("End 0%s" % (selector_position.y - 1 as int)).global_position
+
+	tween.tween_property(character, "position", target_position, animation_speed).set_trans(Tween.TRANS_SINE)
+	path_tiles.append(target_position)
+	await tween.finished
+	_show_other_characters_moving()
+
 func _move_centre() -> void:
 	has_moved = true
 	if is_movement_possible(Vector2.RIGHT):
 		centre_position_in_grid = selector_position
 		_trigger_character_movement()
+		path_tiles.append(character.global_position)
 		selector_position += Vector2.RIGHT
 		if is_movement_possible(Vector2.RIGHT):
 			_tween_to_new_position()
@@ -84,8 +117,7 @@ func _move_centre() -> void:
 			_set_tiles_inactive()
 		else:
 			print("Level Completed")
-			controls_enabled = false
-			level_completed.emit()
+			_end_of_level_celebrations()
 
 func is_movement_possible(key: Vector2) -> bool:
 	if has_moved:
