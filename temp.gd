@@ -39,14 +39,12 @@ func _game_over_movement() -> void:
 	level_failed.emit()
 
 func _trigger_character_movement() -> void:
-	controls_enabled = false
 	if traps.has(_get_selection_position()):
 		_game_over_movement()
 	else:
 		var tween = create_tween()
 		tween.tween_property(character, "position", selector.global_position, animation_speed).set_trans(Tween.TRANS_SINE)
 		await tween.finished
-		controls_enabled = true
 
 func _toggle_tile_status(is_active: bool, grid_position: Vector2) -> void:
 	get_node(_get_name(grid_position)).set_modulate(Color(1, 1, 1, 1.0 if is_active else 0.01))
@@ -80,18 +78,21 @@ func _move_centre() -> void:
 		centre_position_in_grid = selector_position
 		_trigger_character_movement()
 		selector_position += Vector2.RIGHT
-		_tween_to_new_position()
-		_set_active_tiles()
-		_set_tiles_inactive()
-	else:
-		level_completed.emit()
+		if is_movement_possible(Vector2.RIGHT):
+			_tween_to_new_position()
+			_set_active_tiles()
+			_set_tiles_inactive()
+		else:
+			print("Level Completed")
+			controls_enabled = false
+			level_completed.emit()
 
 func is_movement_possible(key: Vector2) -> bool:
 	if has_moved:
 		match ( key ):
 			Vector2.UP: return centre_position_in_grid.y > 0 and selector_position.y != 0
-			Vector2.DOWN: return centre_position_in_grid.y < rows - 1 and selector_position.y < rows - 1
-			Vector2.RIGHT: return centre_position_in_grid.x < columns - 1 and selector_position.x < columns - 1
+			Vector2.DOWN: return centre_position_in_grid.y < rows - 1 and selector_position.y <= rows - 1
+			Vector2.RIGHT: return centre_position_in_grid.x < columns - 1 and selector_position.x <= columns - 1
 			Vector2.LEFT: return centre_position_in_grid.x > 0 and selector_position.x != 0
 			_: return false
 	else:
