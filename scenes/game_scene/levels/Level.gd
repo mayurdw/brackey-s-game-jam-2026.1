@@ -14,6 +14,13 @@ extends Node2D
 @onready var end_02: Sprite2D = $"End 02"
 @onready var end_03: Sprite2D = $"End 03"
 @onready var other_character: Node2D = $"Other Character"
+@onready var jump: AudioStreamPlayer2D = $"Jump"
+@onready var death: AudioStreamPlayer2D = $Death
+@onready var switch: AudioStreamPlayer2D = $Switch
+@onready var lamp_light_1: PointLight2D = $Lamp/LampLight1
+@onready var lamp_light_2: PointLight2D = $Lamp2/LampLight2
+@onready var lamp_light_3: PointLight2D = $Lamp3/LampLight3
+@onready var beeper: AudioStreamPlayer2D = $Beeper
 
 var animation_speed : float = 0.25
 var is_moving : bool = false
@@ -24,6 +31,7 @@ var controls_enabled : bool = true
 var active_tiles : Array[Vector2] = []
 var game_time : int = 0
 var path_tiles : Array[Vector2] = []
+var level_lost_state: bool = false
 
 signal level_won(level_path: String)
 signal level_lost
@@ -32,12 +40,21 @@ const INPUTS : Dictionary[String, Vector2]= { "move_up" : Vector2.UP, "move_righ
 const UNMOVED_INPUTS : Dictionary[String, Vector2]= { "move_up" : Vector2.UP, "move_down" : Vector2.DOWN }
 
 func _ready() -> void:
+	lamp_light_1.energy = 9.0
+	lamp_light_2.energy = 9.0
+	lamp_light_3.energy = 9.0
 	controls_enabled = false
 	timer.start(1.0)
 
 func _on_timer_timeout() -> void:
 	start_time -= 1
+	lamp_light_1.energy /= 3.0
+	lamp_light_2.energy /= 3.0
+	lamp_light_3.energy /= 3.0
+	beeper.pitch_scale = randf_range(0.5, 0.8)
+	beeper.play()
 	if not start_time > 0:
+		timer.stop()
 		controls_enabled = true
 		_set_tiles_inactive()
 		_set_active_tiles()
@@ -47,6 +64,10 @@ func _show_blood_animation() -> void:
 
 func _game_over_movement() -> void:
 	print("Game Over")
+	death.pitch_scale = randf_range(0.5, 0.8)
+	death.play()
+	controls_enabled = true
+	level_lost_state = true
 	var tween = create_tween()
 	tween.tween_property(character, "position", selector.global_position, animation_speed).set_trans(Tween.TRANS_SINE)
 	await tween.finished
@@ -89,6 +110,8 @@ func _set_tiles_inactive() -> void:
 
 func _show_other_characters_moving() -> void:
 	for i in path_tiles:
+		jump.pitch_scale = randf_range(0.4, 0.6)
+		jump.play()
 		var tween = create_tween()
 		tween.tween_property(other_character, "position", i, animation_speed).set_trans(Tween.TRANS_SINE)
 		await tween.finished
@@ -109,6 +132,10 @@ func _move_centre() -> void:
 	if is_movement_possible(Vector2.RIGHT):
 		centre_position_in_grid = selector_position
 		_trigger_character_movement()
+		jump.pitch_scale  = randf_range(0.5, 0.8)
+		jump.play()
+		if level_lost_state:
+			return
 		path_tiles.append(character.global_position)
 		selector_position += Vector2.RIGHT
 		if is_movement_possible(Vector2.RIGHT):
@@ -138,6 +165,8 @@ func _move_position ( key: Vector2 ) -> void:
 		selector_position = centre_position_in_grid + key
 	else:
 		selector_position += key
+	switch.pitch_scale = randf_range(0.5, 0.8)
+	switch.play()
 
 func _get_id(position_in_grid: Vector2) -> String:
 	return "%d%d" % [position_in_grid.y, position_in_grid.x]

@@ -9,6 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://cynqphf0w5ab0" path="res://assets/tiles/Walls/tile_0060.png" id="7_i0bn4"]
 [ext_resource type="Texture2D" uid="uid://2y53hp45l2hm" path="res://assets/tiles/Walls/tile_0085.png" id="8_3581m"]
 [ext_resource type="Texture2D" uid="uid://cqscrkb6jthvo" path="res://assets/tiles/Walls/tilemap_packed.png" id="9_wooo7"]
+[ext_resource type="AudioStream" uid="uid://c8a338bce6eri" path="res://scenes/game_scene/levels/jump1.ogg" id="10_uvmmr"]
+[ext_resource type="AudioStream" uid="uid://cqiv2tm0j484w" path="res://scenes/game_scene/levels/lose1.ogg" id="11_udkxr"]
+[ext_resource type="AudioStream" uid="uid://ceuc2tcl87xmu" path="res://scenes/game_scene/levels/switch_002.ogg" id="12_5b26n"]
+[ext_resource type="AudioStream" uid="uid://cm62cqclwqr2l" path="res://scenes/menus/main_menu/pickup1.ogg" id="13_fut2a"]
 
 [sub_resource type="Gradient" id="Gradient_uvmmr"]
 offsets = PackedFloat32Array(0, 0.72981364)
@@ -82,7 +86,7 @@ scale = Vector2(0.5, 0.5)
 texture = SubResource("AtlasTexture_5hr3w")
 centered = false
 
-[node name="PointLight2D" type="PointLight2D" parent="Lamp" unique_id=829493872]
+[node name="LampLight1" type="PointLight2D" parent="Lamp" unique_id=829493872]
 position = Vector2(6, 4)
 color = Color(0.9104942, 0.7288451, 0.51883715, 1)
 texture = SubResource("GradientTexture2D_udkxr")
@@ -93,7 +97,7 @@ scale = Vector2(0.5, 0.5)
 texture = SubResource("AtlasTexture_5hr3w")
 centered = false
 
-[node name="PointLight2D" type="PointLight2D" parent="Lamp2" unique_id=741900420]
+[node name="LampLight2" type="PointLight2D" parent="Lamp2" unique_id=741900420]
 position = Vector2(6, 4)
 color = Color(0.9104942, 0.7288451, 0.51883715, 1)
 texture = SubResource("GradientTexture2D_udkxr")
@@ -104,7 +108,7 @@ scale = Vector2(0.5, 0.5)
 texture = SubResource("AtlasTexture_5hr3w")
 centered = false
 
-[node name="PointLight2D" type="PointLight2D" parent="Lamp3" unique_id=495417283]
+[node name="LampLight3" type="PointLight2D" parent="Lamp3" unique_id=495417283]
 position = Vector2(6, 4)
 color = Color(0.9104942, 0.7288451, 0.51883715, 1)
 shadow_enabled = true
@@ -254,5 +258,21 @@ scale = Vector2(0.5, 0.5)
 color = Color(0.6403132, 0.7842649, 0.9628231, 1)
 energy = 0.3
 texture = SubResource("GradientTexture2D_udkxr")
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="." unique_id=625040352]
+stream = ExtResource("10_uvmmr")
+bus = &"SFX"
+
+[node name="Death" type="AudioStreamPlayer2D" parent="." unique_id=1142576920]
+stream = ExtResource("11_udkxr")
+bus = &"SFX"
+
+[node name="Switch" type="AudioStreamPlayer2D" parent="." unique_id=2104168928]
+stream = ExtResource("12_5b26n")
+bus = &"SFX"
+
+[node name="Beeper" type="AudioStreamPlayer2D" parent="." unique_id=235189697]
+stream = ExtResource("13_fut2a")
+bus = &"SFX"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

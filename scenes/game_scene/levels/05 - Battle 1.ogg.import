@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dvd3btqm4rcll"
+path="res://.godot/imported/05 - Battle 1.ogg-2e3df088a4d329501f6b89a63ef6c902.oggvorbisstr"
+
+[deps]
+
+source_file="res://scenes/game_scene/levels/05 - Battle 1.ogg"
+dest_files=["res://.godot/imported/05 - Battle 1.ogg-2e3df088a4d329501f6b89a63ef6c902.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
