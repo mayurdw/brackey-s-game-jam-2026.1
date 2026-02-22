@@ -19,11 +19,8 @@ func load_game_scene() -> void:
 	super.load_game_scene()
 
 func new_game() -> void:
-	if confirm_new_game and continue_game_button.visible:
-		new_game_confirmation.show()
-	else:
-		GameState.reset()
-		load_game_scene()
+	GameState.reset()
+	load_game_scene()
 
 func intro_done() -> void:
 	animation_state_machine.travel("OpenMainMenu")
