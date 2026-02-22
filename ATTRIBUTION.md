@@ -7,6 +7,19 @@ Author: [Marek Belski and contributors](https://github.com/Maaack/Godot-Game-Tem
 Source: [github: Godot-Game-Template](https://github.com/Maaack/Godot-Game-Template)  
 License: [MIT License](LICENSE.txt)  
 
+### Kenney's Game Assets All in 1 pack
+![Kenney](/assets/kenney_logo/logo.png)
+Author: [Kenney](https://kenney.itch.io/kenney-game-assets)
+
+### xdeviruchi's 16-bit Fantasy & Adventure pack
+![xdeviruchi](https://xdeviruchi.itch.io/16-bit-fantasy-adventure-music-pack)
+
+### BucketBrigade's YouTube
+![How To Make Your 2D Sidescroller Levels Beautiful](https://www.youtube.com/watch?v=Q1AAxGTnp7E)
+
+### Bacon And Games's YouTube
+~[Simple Godot Shader I Use in EVERY Game](https://www.youtube.com/watch?v=cObwzagwgmA)
+
 ## Sourced
 #### Godot Engine Logo
 Author: Andrea Calabró  
@@ -24,11 +37,6 @@ License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/)
 Author: [Juan Linietsky, Ariel Manzur, and contributors](https://godotengine.org/contact)  
 Source: [godotengine.org](https://godotengine.org/)  
 License: [MIT License](https://github.com/godotengine/godot/blob/master/LICENSE.txt)  
-
-#### Visual Studio Code
-Author: [Microsoft](https://opensource.microsoft.com/)  
-Source: [github: vscode](https://github.com/microsoft/vscode)  
-License: [MIT License](https://github.com/microsoft/vscode/blob/main/LICENSE.txt)
 
 #### Git
 ![Git Logo](/assets/git_logo/Git-Logo-2Color.png)  
