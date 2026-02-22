@@ -1,8 +1,8 @@
-[gd_scene format=3 uid="uid://bi2337q1w7ny2"]
+[gd_scene format=3 uid="uid://r3q8tddqsywd"]
 
-[ext_resource type="Script" uid="uid://xfugmpspqbcc" path="res://addons/maaacks_game_template/base/nodes/windows/overlaid_window.gd" id="1_vqts2"]
-[ext_resource type="Texture2D" uid="uid://b4fycosvanhf3" path="res://resources/characters/player.tres" id="2_vqts2"]
-[ext_resource type="Script" uid="uid://1nf36h0gms3q" path="res://addons/maaacks_game_template/base/nodes/utilities/capture_focus.gd" id="3_ghnrh"]
+[ext_resource type="Script" uid="uid://xfugmpspqbcc" path="res://addons/maaacks_game_template/base/nodes/windows/overlaid_window.gd" id="1_w0osa"]
+[ext_resource type="Texture2D" uid="uid://b4fycosvanhf3" path="res://resources/characters/player.tres" id="2_uwlw8"]
+[ext_resource type="Script" uid="uid://1nf36h0gms3q" path="res://addons/maaacks_game_template/base/nodes/utilities/capture_focus.gd" id="3_6mvx6"]
 
 [node name="OverlaidWindow" type="PanelContainer" unique_id=2002109630]
 process_mode = 3
@@ -20,11 +20,11 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-script = ExtResource("1_vqts2")
+script = ExtResource("1_w0osa")
 pauses_game = true
 exclusive_background_color = Color(0, 0, 0, 0.5)
 update_content = true
-text = "Why me?"
+text = "Oookay, what do I have to do?"
 close_button_text = "Next"
 title = "Player"
 title_font_size = 20
@@ -60,7 +60,7 @@ theme_override_constants/separation = 16
 
 [node name="Character" type="TextureRect" parent="ContentContainer/BoxContainer/TitleMargin/BoxContainer/HBoxContainer" unique_id=851786918]
 layout_mode = 2
-texture = ExtResource("2_vqts2")
+texture = ExtResource("2_uwlw8")
 expand_mode = 3
 stretch_mode = 4
 
@@ -84,7 +84,7 @@ size_flags_vertical = 3
 unique_name_in_owner = true
 layout_mode = 2
 bbcode_enabled = true
-text = "Why me?"
+text = "Oookay, what do I have to do?"
 fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -101,7 +101,7 @@ size_flags_vertical = 3
 theme_override_constants/separation = 16
 alignment = 1
 vertical = true
-script = ExtResource("3_ghnrh")
+script = ExtResource("3_6mvx6")
 
 [node name="CloseButton" type="Button" parent="ContentContainer/BoxContainer/MenuButtonsMargin/MenuButtons" unique_id=314526102]
 unique_name_in_owner = true

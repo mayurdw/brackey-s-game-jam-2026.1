@@ -1,8 +1,12 @@
-[gd_scene format=3 uid="uid://bi2337q1w7ny2"]
+[gd_scene format=3 uid="uid://b1juvt7vgf6e4"]
 
-[ext_resource type="Script" uid="uid://xfugmpspqbcc" path="res://addons/maaacks_game_template/base/nodes/windows/overlaid_window.gd" id="1_vqts2"]
-[ext_resource type="Texture2D" uid="uid://b4fycosvanhf3" path="res://resources/characters/player.tres" id="2_vqts2"]
-[ext_resource type="Script" uid="uid://1nf36h0gms3q" path="res://addons/maaacks_game_template/base/nodes/utilities/capture_focus.gd" id="3_ghnrh"]
+[ext_resource type="Script" uid="uid://xfugmpspqbcc" path="res://addons/maaacks_game_template/base/nodes/windows/overlaid_window.gd" id="1_t870o"]
+[ext_resource type="Texture2D" uid="uid://cqscrkb6jthvo" path="res://assets/tiles/Walls/tilemap_packed.png" id="2_sx8f3"]
+[ext_resource type="Script" uid="uid://1nf36h0gms3q" path="res://addons/maaacks_game_template/base/nodes/utilities/capture_focus.gd" id="3_2b7yj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yrntm"]
+atlas = ExtResource("2_sx8f3")
+region = Rect2(0, 112, 17, 16)
 
 [node name="OverlaidWindow" type="PanelContainer" unique_id=2002109630]
 process_mode = 3
@@ -20,13 +24,15 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-script = ExtResource("1_vqts2")
+script = ExtResource("1_t870o")
 pauses_game = true
 exclusive_background_color = Color(0, 0, 0, 0.5)
 update_content = true
-text = "Why me?"
+text = "Choose a starting tile. You can only go UP, DOWN, RIGHT, LEFT. 
+
+Don't land on a spike!"
 close_button_text = "Next"
-title = "Player"
+title = "Wizard"
 title_font_size = 20
 
 [node name="ContentContainer" type="MarginContainer" parent="." unique_id=1755486830]
@@ -60,7 +66,7 @@ theme_override_constants/separation = 16
 
 [node name="Character" type="TextureRect" parent="ContentContainer/BoxContainer/TitleMargin/BoxContainer/HBoxContainer" unique_id=851786918]
 layout_mode = 2
-texture = ExtResource("2_vqts2")
+texture = SubResource("AtlasTexture_yrntm")
 expand_mode = 3
 stretch_mode = 4
 
@@ -69,7 +75,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
-text = "Player"
+text = "Wizard"
 horizontal_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="ContentContainer/BoxContainer/TitleMargin/BoxContainer" unique_id=33373596]
@@ -84,7 +90,9 @@ size_flags_vertical = 3
 unique_name_in_owner = true
 layout_mode = 2
 bbcode_enabled = true
-text = "Why me?"
+text = "Choose a starting tile. You can only go UP, DOWN, RIGHT, LEFT. 
+
+Don't land on a spike!"
 fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -101,7 +109,7 @@ size_flags_vertical = 3
 theme_override_constants/separation = 16
 alignment = 1
 vertical = true
-script = ExtResource("3_ghnrh")
+script = ExtResource("3_2b7yj")
 
 [node name="CloseButton" type="Button" parent="ContentContainer/BoxContainer/MenuButtonsMargin/MenuButtons" unique_id=314526102]
 unique_name_in_owner = true

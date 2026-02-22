@@ -12,6 +12,15 @@
 [ext_resource type="PackedScene" uid="uid://c2c3f1ywjlrff" path="res://scenes/loading_screen/level_loading_screen.tscn" id="10_0v86b"]
 [ext_resource type="Script" uid="uid://bnhmjy582mlax" path="res://scenes/game_scene/configurable_sub_viewport.gd" id="11_ulq3g"]
 [ext_resource type="Script" uid="uid://bmcttnpvsi36l" path="res://scenes/game_scene/game_timer.gd" id="12_gpor5"]
+[ext_resource type="Script" uid="uid://bll85ag2um7hl" path="res://scenes/game_scene/tutorial_manager.gd" id="13_7aihr"]
+[ext_resource type="PackedScene" uid="uid://ks83y4cfd5a5" path="res://scenes/game_scene/tutorials/tutorial_1.tscn" id="14_wr4n6"]
+[ext_resource type="PackedScene" uid="uid://bi2337q1w7ny2" path="res://scenes/game_scene/tutorials/tutorial_2.tscn" id="15_0v86b"]
+[ext_resource type="PackedScene" uid="uid://dry7wcuroq06v" path="res://scenes/game_scene/tutorials/tutorial_3.tscn" id="16_ulq3g"]
+[ext_resource type="PackedScene" uid="uid://b1juvt7vgf6e4" path="res://scenes/game_scene/tutorials/tutorial_4.tscn" id="17_gpor5"]
+[ext_resource type="PackedScene" uid="uid://bg6jjhd8eaalt" path="res://scenes/game_scene/tutorials/tutorial_5.tscn" id="18_dqr2x"]
+[ext_resource type="PackedScene" uid="uid://u1f4bsw5mvce" path="res://scenes/game_scene/tutorials/tutorial_6.tscn" id="19_8tg4s"]
+[ext_resource type="PackedScene" uid="uid://r3q8tddqsywd" path="res://scenes/game_scene/tutorials/tutorial_7.tscn" id="20_20j2n"]
+[ext_resource type="PackedScene" uid="uid://dyuky1q4hskjk" path="res://scenes/game_scene/tutorials/tutorial_8.tscn" id="21_ck3wh"]
 
 [node name="GameUI" type="Control" unique_id=672765824]
 layout_mode = 3
@@ -70,3 +79,8 @@ script = ExtResource("11_ulq3g")
 
 [node name="GameTimer" type="Node" parent="." unique_id=885493004]
 script = ExtResource("12_gpor5")
+
+[node name="Tutorial Manager" type="Node" parent="." unique_id=1934906808]
+script = ExtResource("13_7aihr")
+tutorial_scenes = Array[PackedScene]([ExtResource("14_wr4n6"), ExtResource("15_0v86b"), ExtResource("16_ulq3g"), ExtResource("17_gpor5"), ExtResource("18_dqr2x"), ExtResource("19_8tg4s"), ExtResource("20_20j2n"), ExtResource("21_ck3wh")])
+auto_open = true

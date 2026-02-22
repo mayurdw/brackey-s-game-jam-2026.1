@@ -1,19 +1,121 @@
-[gd_scene format=3 uid="uid://b444n7xu3j48v"]
+[gd_scene format=3 uid="uid://dry7wcuroq06v"]
 
-[ext_resource type="PackedScene" uid="uid://6gdbfi0172ji" path="res://addons/maaacks_game_template/base/nodes/windows/overlaid_window.tscn" id="1_hy5iy"]
+[ext_resource type="Script" uid="uid://xfugmpspqbcc" path="res://addons/maaacks_game_template/base/nodes/windows/overlaid_window.gd" id="1_1jjs0"]
+[ext_resource type="Texture2D" uid="uid://cqscrkb6jthvo" path="res://assets/tiles/Walls/tilemap_packed.png" id="2_2ksgk"]
+[ext_resource type="Script" uid="uid://1nf36h0gms3q" path="res://addons/maaacks_game_template/base/nodes/utilities/capture_focus.gd" id="3_akdts"]
 
-[node name="OverlaidWindow" unique_id=1122261693 instance=ExtResource("1_hy5iy")]
+[sub_resource type="AtlasTexture" id="AtlasTexture_yrntm"]
+atlas = ExtResource("2_2ksgk")
+region = Rect2(0, 112, 17, 16)
+
+[node name="OverlaidWindow" type="PanelContainer" unique_id=2002109630]
 process_mode = 3
 custom_minimum_size = Vector2(420, 200)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -50.0
+offset_right = 80.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_1jjs0")
 pauses_game = true
+exclusive_background_color = Color(0, 0, 0, 0.5)
 update_content = true
-text = "You can always open the tutorial again to read instructions. "
-title = "Tutorial"
+text = "Because you are the intern. 
+Quit whining and pay attention to the tiles.
+Some tiles are safe, but others have spikes.
+Find us a path through this maze."
+close_button_text = "Next"
+title = "Wizard"
 title_font_size = 20
 
-[node name="TitleLabel" parent="ContentContainer/BoxContainer/TitleMargin/BoxContainer" parent_id_path=PackedInt32Array(1788474031) index="0" unique_id=1049966061]
-theme_override_font_sizes/font_size = 20
-text = "Tutorial"
+[node name="ContentContainer" type="MarginContainer" parent="." unique_id=1755486830]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
 
-[node name="DescriptionLabel" parent="ContentContainer/BoxContainer/BodyMargin" parent_id_path=PackedInt32Array(590613964) index="0" unique_id=617407155]
-text = "You can always open the tutorial again to read instructions. "
+[node name="BoxContainer" type="BoxContainer" parent="ContentContainer" unique_id=394030069]
+layout_mode = 2
+vertical = true
+
+[node name="TitleMargin" type="MarginContainer" parent="ContentContainer/BoxContainer" unique_id=1262022916]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/margin_left = -14
+theme_override_constants/margin_top = -14
+theme_override_constants/margin_right = -14
+theme_override_constants/margin_bottom = 8
+
+[node name="BoxContainer" type="BoxContainer" parent="ContentContainer/BoxContainer/TitleMargin" unique_id=1788474031]
+layout_mode = 2
+theme_override_constants/separation = 0
+vertical = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ContentContainer/BoxContainer/TitleMargin/BoxContainer" unique_id=2075826895]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Character" type="TextureRect" parent="ContentContainer/BoxContainer/TitleMargin/BoxContainer/HBoxContainer" unique_id=851786918]
+layout_mode = 2
+texture = SubResource("AtlasTexture_yrntm")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="TitleLabel" type="Label" parent="ContentContainer/BoxContainer/TitleMargin/BoxContainer/HBoxContainer" unique_id=1049966061]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "Wizard"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="ContentContainer/BoxContainer/TitleMargin/BoxContainer" unique_id=33373596]
+layout_mode = 2
+
+[node name="BodyMargin" type="MarginContainer" parent="ContentContainer/BoxContainer" unique_id=590613964]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="ContentContainer/BoxContainer/BodyMargin" unique_id=617407155]
+unique_name_in_owner = true
+layout_mode = 2
+bbcode_enabled = true
+text = "Because you are the intern. 
+Quit whining and pay attention to the tiles.
+Some tiles are safe, but others have spikes.
+Find us a path through this maze."
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MenuButtonsMargin" type="MarginContainer" parent="ContentContainer/BoxContainer" unique_id=1413292752]
+layout_mode = 2
+theme_override_constants/margin_top = 8
+
+[node name="MenuButtons" type="BoxContainer" parent="ContentContainer/BoxContainer/MenuButtonsMargin" unique_id=1371114575]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+alignment = 1
+vertical = true
+script = ExtResource("3_akdts")
+
+[node name="CloseButton" type="Button" parent="ContentContainer/BoxContainer/MenuButtonsMargin/MenuButtons" unique_id=314526102]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Next"
+
+[connection signal="pressed" from="ContentContainer/BoxContainer/MenuButtonsMargin/MenuButtons/CloseButton" to="." method="_on_close_button_pressed"]
