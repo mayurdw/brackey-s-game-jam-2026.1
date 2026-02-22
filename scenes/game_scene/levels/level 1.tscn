@@ -1,17 +1,17 @@
 [gd_scene format=4 uid="uid://dx45bvyf2ryup"]
 
-[ext_resource type="Script" uid="uid://wv70fh066ryt" path="res://temp.gd" id="1_f68d1"]
-[ext_resource type="TileSet" uid="uid://ovja6vcwo3kb" path="res://resources/tileset/base_tileset.tres" id="1_ufh25"]
-[ext_resource type="Texture2D" uid="uid://dgjtsfmreveib" path="res://assets/tiles/Walls/tile_0066.png" id="2_k81e3"]
-[ext_resource type="Texture2D" uid="uid://dlitjl06of5t0" path="res://assets/hole.png" id="3_h2clf"]
-[ext_resource type="Texture2D" uid="uid://cynqphf0w5ab0" path="res://assets/tiles/Walls/tile_0060.png" id="3_k81e3"]
-[ext_resource type="Texture2D" uid="uid://6ou0pxkbes8i" path="res://assets/tiles/Walls/tile_0041.png" id="5_q51th"]
-[ext_resource type="Texture2D" uid="uid://2y53hp45l2hm" path="res://assets/tiles/Walls/tile_0085.png" id="7_iyses"]
-[ext_resource type="Texture2D" uid="uid://djxxb2vqhiiqm" path="res://assets/tiles/Walls/tile_0091.png" id="8_1nlwk"]
-[ext_resource type="Texture2D" uid="uid://cqscrkb6jthvo" path="res://assets/tiles/Walls/tilemap_packed.png" id="9_b6ebu"]
+[ext_resource type="Script" uid="uid://wv70fh066ryt" path="res://scenes/game_scene/levels/Level.gd" id="1_3illf"]
+[ext_resource type="Texture2D" uid="uid://djxxb2vqhiiqm" path="res://assets/tiles/Walls/tile_0091.png" id="2_au2yn"]
+[ext_resource type="TileSet" uid="uid://ovja6vcwo3kb" path="res://resources/tileset/base_tileset.tres" id="3_jxvm7"]
+[ext_resource type="Texture2D" uid="uid://dlitjl06of5t0" path="res://assets/hole.png" id="4_agutn"]
+[ext_resource type="Texture2D" uid="uid://dgjtsfmreveib" path="res://assets/tiles/Walls/tile_0066.png" id="5_fe53m"]
+[ext_resource type="Texture2D" uid="uid://6ou0pxkbes8i" path="res://assets/tiles/Walls/tile_0041.png" id="6_q1ip1"]
+[ext_resource type="Texture2D" uid="uid://cynqphf0w5ab0" path="res://assets/tiles/Walls/tile_0060.png" id="7_i0bn4"]
+[ext_resource type="Texture2D" uid="uid://2y53hp45l2hm" path="res://assets/tiles/Walls/tile_0085.png" id="8_3581m"]
+[ext_resource type="Texture2D" uid="uid://cqscrkb6jthvo" path="res://assets/tiles/Walls/tilemap_packed.png" id="9_wooo7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q51th"]
-texture = ExtResource("3_h2clf")
+texture = ExtResource("4_agutn")
 0:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_iyses"]
@@ -26,32 +26,32 @@ gravity = Vector3(0, 0, 0)
 color = Color(1.0039216, 0.2875431, 0.46860582, 1)
 
 [node name="Temp" type="Node2D" unique_id=1019181701]
-script = ExtResource("1_f68d1")
+script = ExtResource("1_3illf")
 traps = Array[String](["01", "03", "13", "21", "33"])
 
 [node name="End 03" type="Sprite2D" parent="." unique_id=846201130]
 position = Vector2(256, 160)
-texture = ExtResource("8_1nlwk")
+texture = ExtResource("2_au2yn")
 centered = false
 
 [node name="End 02" type="Sprite2D" parent="." unique_id=1387493050]
 position = Vector2(256, 128)
-texture = ExtResource("8_1nlwk")
+texture = ExtResource("2_au2yn")
 centered = false
 
 [node name="End 01" type="Sprite2D" parent="." unique_id=493290572]
 position = Vector2(256, 96)
-texture = ExtResource("8_1nlwk")
+texture = ExtResource("2_au2yn")
 centered = false
 
 [node name="End 00" type="Sprite2D" parent="." unique_id=920459696]
 position = Vector2(256, 64)
-texture = ExtResource("8_1nlwk")
+texture = ExtResource("2_au2yn")
 centered = false
 
 [node name="Backgreound" type="TileMapLayer" parent="." unique_id=1471314284]
 tile_map_data = PackedByteArray("AAAAAAEAAAAEAAEAAAAAAAIAAAAJAAQAAAABAAEAAAACAAAAAAABAAIAAAAEAAMAAAACAAEAAAACAAAAAAACAAIAAAAEAAMAAAADAAEAAAACAAAAAAADAAIAAAAEAAMAAAAEAAEAAAACAAAAAAAEAAIAAAAEAAMAAAAFAAEAAAACAAAAAAAFAAIAAAADAAUAAAAGAAEAAAACAAAAAAAGAAIAAAAEAAMAAAAHAAEAAAACAAAAAAAHAAIAAAAEAAMAAAAIAAEAAAACAAAAAAAIAAIAAAAEAAMAAAAKAAEAAAACAAAAAAAKAAIAAAAEAAMAAAALAAEAAAACAAAAAAALAAIAAAAEAAMAAAAMAAEAAAACAAAAAAAMAAIAAAAEAAMAAAANAAEAAAACAAAAAAANAAIAAAAEAAMAAAAOAAEAAAACAAAAAAAOAAIAAAAEAAMAAAAPAAEAAAACAAAAAAAPAAIAAAAEAAMAAAAQAAEAAAACAAAAAAAQAAIAAAAEAAMAAAARAAEAAAACAAAAAAARAAIAAAAEAAMAAAASAAEAAAACAAAAAAASAAIAAAAEAAMAAAATAAEAAAAFAAEAAAATAAIAAAALAAQAAAAAAAAAAAADAAEAAAABAAAAAAAAAAEAAAACAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAEAAAAAAAAAAEAAAAFAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAJAAAAAAAAAAAAAAAKAAAAAAAAAAAAAAALAAAAAAAAAAAAAAAMAAAAAAAAAAIAAAATAAAAAAABAAEAAAASAAAAAAAAAAEAAAARAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAPAAAAAAAAAAAAAAAOAAAAAAAAAAIAAAANAAAAAAAAAAAAAAAJAAEAAAACAAAAAAAJAAIAAAAEAAMAAAAAAAMAAAADAAQAAAABAAMAAAADAAQAAAACAAMAAAACAAQAAAADAAMAAAADAAQAAAAEAAMAAAADAAQAAAAFAAMAAAADAAYAAAAGAAMAAAADAAQAAAAHAAMAAAADAAQAAAAIAAMAAAADAAQAAAAJAAMAAAADAAQAAAAKAAMAAAADAAQAAAALAAMAAAADAAQAAAAMAAMAAAADAAQAAAANAAMAAAADAAQAAAAOAAMAAAACAAQAAAAPAAMAAAACAAQAAAAQAAMAAAADAAQAAAARAAMAAAACAAQAAAASAAMAAAACAAQAAAATAAMAAAACAAQAAAAAAAQAAAAAAAQAAAAAAAUAAAAAAAQAAAAAAAYAAAABAAQAAAAAAAcAAAAAAAQAAAAAAAgAAAAAAAQAAAAAAAkAAAAAAAQAAAAAAAoAAAAAAAQAAAAAAAsAAAAAAAQAAAABAAQAAAAAAAQAAAABAAcAAAAAAAQAAAABAAgAAAAAAAQAAAABAAkAAAAAAAQAAAABAAoAAAAAAAQAAAABAAsAAAAAAAQAAAACAAQAAAAAAAQAAAACAAUAAAABAAQAAAACAAYAAAAAAAQAAAACAAcAAAAAAAQAAAACAAgAAAAAAAQAAAACAAkAAAAAAAQAAAACAAoAAAAAAAQAAAACAAsAAAAAAAQAAAADAAQAAAAAAAQAAAADAAUAAAAAAAQAAAADAAYAAAAAAAQAAAADAAcAAAAAAAQAAAADAAgAAAAAAAQAAAADAAkAAAAAAAQAAAADAAoAAAAAAAQAAAADAAsAAAAAAAQAAAAEAAQAAAAAAAQAAAAEAAUAAAAAAAQAAAAEAAYAAAAAAAQAAAAEAAcAAAAAAAQAAAAEAAgAAAAAAAQAAAAEAAkAAAAAAAQAAAAEAAoAAAAAAAQAAAAEAAsAAAAAAAQAAAAFAAQAAAAAAAQAAAAFAAUAAAAAAAQAAAAFAAYAAAAAAAQAAAAFAAcAAAAAAAQAAAAFAAgAAAAAAAQAAAAFAAkAAAAAAAQAAAAFAAoAAAAAAAQAAAAFAAsAAAAAAAQAAAAGAAQAAAABAAQAAAAGAAUAAAAAAAQAAAAGAAYAAAAAAAQAAAAGAAcAAAAAAAQAAAAGAAkAAAAAAAQAAAAGAAoAAAAAAAQAAAAGAAsAAAAAAAQAAAAHAAQAAAAAAAQAAAAHAAUAAAAAAAQAAAAHAAYAAAAAAAQAAAAHAAcAAAAAAAQAAAAHAAgAAAAAAAQAAAAHAAkAAAAAAAQAAAAHAAoAAAAAAAQAAAAHAAsAAAAAAAQAAAAIAAQAAAAAAAQAAAAIAAUAAAAAAAQAAAAIAAcAAAAAAAQAAAAIAAgAAAAAAAQAAAAIAAkAAAAAAAQAAAAIAAoAAAAAAAQAAAAIAAsAAAAAAAQAAAAJAAQAAAAAAAQAAAAJAAUAAAAAAAQAAAAJAAYAAAAAAAQAAAAJAAcAAAAAAAQAAAAJAAgAAAAAAAQAAAAJAAkAAAAAAAQAAAAJAAoAAAAAAAQAAAAJAAsAAAAAAAQAAAAKAAQAAAAAAAQAAAAKAAUAAAAAAAQAAAAKAAYAAAAAAAQAAAAKAAcAAAAAAAQAAAAKAAgAAAAAAAQAAAAKAAkAAAAAAAQAAAAKAAoAAAAAAAQAAAAKAAsAAAAAAAQAAAALAAQAAAAAAAQAAAALAAUAAAAAAAQAAAALAAYAAAAAAAQAAAALAAcAAAAAAAQAAAALAAgAAAAAAAQAAAALAAkAAAAAAAQAAAALAAoAAAAAAAQAAAALAAsAAAAAAAQAAAAMAAQAAAAAAAQAAAAMAAUAAAAAAAQAAAAMAAYAAAAAAAQAAAAMAAcAAAAAAAQAAAAMAAgAAAAAAAQAAAAMAAkAAAAAAAQAAAAMAAoAAAAAAAQAAAAMAAsAAAAAAAQAAAANAAQAAAAAAAQAAAANAAUAAAAAAAQAAAANAAYAAAAAAAQAAAANAAcAAAAAAAQAAAANAAgAAAAAAAQAAAANAAkAAAAAAAQAAAANAAoAAAAAAAQAAAANAAsAAAAAAAQAAAAOAAQAAAAAAAQAAAAOAAUAAAAAAAQAAAAOAAYAAAABAAQAAAAOAAcAAAAAAAQAAAAOAAgAAAAAAAQAAAAOAAkAAAAAAAQAAAAOAAoAAAAAAAQAAAAOAAsAAAAAAAQAAAAPAAQAAAAAAAQAAAAPAAUAAAAAAAQAAAAPAAYAAAAAAAQAAAAPAAcAAAAAAAQAAAAPAAgAAAAAAAQAAAAPAAkAAAAAAAQAAAAPAAoAAAAAAAQAAAAPAAsAAAAAAAQAAAAQAAQAAAAAAAQAAAAQAAUAAAAAAAQAAAAQAAYAAAAAAAQAAAAQAAcAAAAAAAQAAAAQAAgAAAAAAAQAAAAQAAkAAAAAAAQAAAAQAAoAAAAAAAQAAAAQAAsAAAAAAAQAAAARAAQAAAABAAQAAAARAAUAAAAAAAQAAAARAAYAAAAAAAQAAAARAAcAAAAAAAQAAAARAAgAAAAAAAQAAAARAAkAAAAAAAQAAAARAAoAAAAAAAQAAAARAAsAAAAAAAQAAAASAAQAAAAAAAQAAAASAAUAAAAAAAQAAAASAAYAAAAAAAQAAAASAAcAAAAAAAQAAAASAAgAAAAAAAQAAAASAAoAAAAAAAQAAAASAAsAAAAAAAQAAAATAAQAAAAAAAQAAAATAAUAAAAAAAQAAAATAAYAAAAAAAQAAAATAAcAAAAAAAQAAAATAAgAAAAAAAQAAAATAAkAAAAAAAQAAAATAAoAAAAAAAQAAAATAAsAAAAAAAQAAAABAAUAAAAAAAQAAAABAAYAAAAAAAQAAAASAAkAAAAAAAQAAAAGAAgAAAAAAAQAAAAIAAYAAAAAAAQAAAA=")
-tile_set = ExtResource("1_ufh25")
+tile_set = ExtResource("3_jxvm7")
 
 [node name="Trap Zone" type="Node2D" parent="." unique_id=491610631]
 position = Vector2(112, 64)
@@ -61,91 +61,91 @@ tile_map_data = PackedByteArray("AAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAA
 tile_set = SubResource("TileSet_iyses")
 
 [node name="00" type="Sprite2D" parent="Trap Zone" unique_id=263691525]
-texture = ExtResource("2_k81e3")
+texture = ExtResource("5_fe53m")
 centered = false
 
 [node name="01" type="Sprite2D" parent="Trap Zone" unique_id=1435267400]
 position = Vector2(32, 0)
-texture = ExtResource("5_q51th")
+texture = ExtResource("6_q1ip1")
 centered = false
 
 [node name="02" type="Sprite2D" parent="Trap Zone" unique_id=1120760777]
 position = Vector2(64, 0)
-texture = ExtResource("2_k81e3")
+texture = ExtResource("5_fe53m")
 centered = false
 
 [node name="03" type="Sprite2D" parent="Trap Zone" unique_id=1340811436]
 position = Vector2(96, 0)
-texture = ExtResource("5_q51th")
+texture = ExtResource("6_q1ip1")
 centered = false
 
 [node name="10" type="Sprite2D" parent="Trap Zone" unique_id=582530306]
 position = Vector2(0, 32)
-texture = ExtResource("2_k81e3")
+texture = ExtResource("5_fe53m")
 centered = false
 
 [node name="11" type="Sprite2D" parent="Trap Zone" unique_id=1403990916]
 position = Vector2(32, 32)
-texture = ExtResource("2_k81e3")
+texture = ExtResource("5_fe53m")
 centered = false
 
 [node name="12" type="Sprite2D" parent="Trap Zone" unique_id=470914127]
 position = Vector2(64, 32)
-texture = ExtResource("2_k81e3")
+texture = ExtResource("5_fe53m")
 centered = false
 
 [node name="13" type="Sprite2D" parent="Trap Zone" unique_id=1259442205]
 position = Vector2(96, 32)
-texture = ExtResource("5_q51th")
+texture = ExtResource("6_q1ip1")
 centered = false
 
 [node name="20" type="Sprite2D" parent="Trap Zone" unique_id=881280679]
 position = Vector2(0, 64)
-texture = ExtResource("2_k81e3")
+texture = ExtResource("5_fe53m")
 centered = false
 
 [node name="21" type="Sprite2D" parent="Trap Zone" unique_id=2043122619]
 position = Vector2(32, 64)
-texture = ExtResource("5_q51th")
+texture = ExtResource("6_q1ip1")
 centered = false
 
 [node name="22" type="Sprite2D" parent="Trap Zone" unique_id=1120627629]
 position = Vector2(64, 64)
-texture = ExtResource("2_k81e3")
+texture = ExtResource("5_fe53m")
 centered = false
 
 [node name="23" type="Sprite2D" parent="Trap Zone" unique_id=1295847443]
 position = Vector2(96, 64)
-texture = ExtResource("2_k81e3")
+texture = ExtResource("5_fe53m")
 centered = false
 
 [node name="30" type="Sprite2D" parent="Trap Zone" unique_id=314895205]
 position = Vector2(0, 96)
-texture = ExtResource("2_k81e3")
+texture = ExtResource("5_fe53m")
 centered = false
 
 [node name="31" type="Sprite2D" parent="Trap Zone" unique_id=1632785316]
 position = Vector2(32, 96)
-texture = ExtResource("2_k81e3")
+texture = ExtResource("5_fe53m")
 centered = false
 
 [node name="32" type="Sprite2D" parent="Trap Zone" unique_id=1826072654]
 position = Vector2(64, 96)
-texture = ExtResource("2_k81e3")
+texture = ExtResource("5_fe53m")
 centered = false
 
 [node name="33" type="Sprite2D" parent="Trap Zone" unique_id=231145305]
 position = Vector2(96, 96)
-texture = ExtResource("5_q51th")
+texture = ExtResource("6_q1ip1")
 centered = false
 
 [node name="Selector" type="Sprite2D" parent="Trap Zone" unique_id=77560631]
-texture = ExtResource("3_k81e3")
+texture = ExtResource("7_i0bn4")
 centered = false
 
 [node name="Character" type="Sprite2D" parent="." unique_id=363186940]
 position = Vector2(64, 128)
-texture = ExtResource("7_iyses")
+texture = ExtResource("8_3581m")
 centered = false
 
 [node name="Blood" type="GPUParticles2D" parent="Character" unique_id=1963013641]
@@ -164,14 +164,14 @@ process_material = SubResource("ParticleProcessMaterial_iyses")
 position = Vector2(32, 128)
 
 [node name="Wizard" type="Sprite2D" parent="Other Character" unique_id=453818505]
-texture = ExtResource("9_b6ebu")
+texture = ExtResource("9_wooo7")
 centered = false
 region_enabled = true
 region_rect = Rect2(0, 112, 16, 16)
 
 [node name="Ghost" type="Sprite2D" parent="Other Character" unique_id=1102602292]
 position = Vector2(0, -16)
-texture = ExtResource("9_b6ebu")
+texture = ExtResource("9_wooo7")
 centered = false
 region_enabled = true
 region_rect = Rect2(0, 146, 16, 12)
